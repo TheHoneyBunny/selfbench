@@ -1,0 +1,9 @@
+{"cennik":[
+{"name":"Diagnoza usterki","price":"50 zł","note":"0 zł, jeśli zlecasz naprawę"},
+{"name":"Czyszczenie + nowa pasta termoprzewodząca","price":"120 zł","note":"wentylatory, radiator, pasta"},
+{"name":"Instalacja systemu (Windows / Linux)","price":"100 zł","note":"ze sterownikami i podstawowymi programami"},
+{"name":"Rozbudowa pamięci RAM","price":"40 zł","note":"robocizna, bez ceny modułu"},
+{"name":"Wymiana klawiatury","price":"od 120 zł","note":"robocizna, zależnie od modelu"},
+{"name":"Wymiana matrycy","price":"od 150 zł","note":"robocizna, bez ceny matrycy"},
+{"name":"Wymiana baterii","price":"od 60 zł","note":"robocizna, bez ceny baterii"}
+]}

@@ -26,3 +26,15 @@ collections:
               - {label: Zdjęcie PRZED, name: before, widget: image, required: false}
               - {label: Zdjęcie PO, name: after, widget: image, required: false}
               - {label: Opis wykonanych prac, name: description, widget: text}
+      - name: cennik
+        label: Cennik
+        file: data/cennik.json
+        fields:
+          - label: Pozycje
+            name: cennik
+            widget: list
+            summary: "{{fields.name}} – {{fields.price}}"
+            fields:
+              - {label: Usługa, name: name, widget: string}
+              - {label: Cena (np. "od 120 zł"), name: price, widget: string}
+              - {label: Dopisek, name: note, widget: string, required: false}
