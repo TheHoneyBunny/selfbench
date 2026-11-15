@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: TWOJ_LOGIN/selfbench               # <- zmień na swoje repo
+  repo: thehoneybunny/selfbench
   branch: main
   base_url: https://TWOJA-DOMENA.pages.dev   # <- adres OAuth proxy (Cloudflare)
   auth_endpoint: /api/auth
