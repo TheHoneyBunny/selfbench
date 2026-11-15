@@ -1,380 +1,149 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SelfBench // Serwis & Konserwacja Laptopów — Orzesze / Żory</title>
-    <meta name="description" content="Czyszczenie układów chłodzenia, wymiana past termoprzewodzących, wentylatorów i czysta instalacja systemów. Orzesze, Żory i okolice.">
-    <style>
-        :root {
-            --bg-main: #0c0d10;
-            --bg-card: #13151a;
-            --bg-card-hover: #181b22;
-            --border-color: #262932;
-            --text-primary: #f1f3f5;
-            --text-secondary: #9aa0ac;
-            --accent: #38bdf8;
-            --accent-dim: rgba(56, 189, 248, 0.12);
-            --success: #22c55e;
-            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-color: var(--bg-main);
-            color: var(--text-primary);
-            font-family: var(--font-sans);
-            line-height: 1.6;
-            padding: 2rem 1.25rem;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .container {
-            max-width: 680px;
-            margin: 0 auto;
-        }
-
-        /* Header / Hero */
-        header {
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .badge {
-            display: inline-block;
-            font-family: var(--font-mono);
-            font-size: 0.78rem;
-            color: var(--accent);
-            background: var(--accent-dim);
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            padding: 0.25rem 0.65rem;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-            letter-spacing: 0.03em;
-        }
-
-        h1 {
-            font-family: var(--font-mono);
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            margin-bottom: 0.5rem;
-        }
-
-        h1 span {
-            color: var(--accent);
-        }
-
-        .lead {
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-            max-width: 58ch;
-        }
-
-        /* Sections */
-        section {
-            margin-bottom: 2.5rem;
-        }
-
-        h2 {
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        h2::before {
-            content: "//";
-            color: var(--accent);
-        }
-
-        /* Pricing Cards */
-        .service-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .service-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 1rem 1.25rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 1rem;
-            transition: border-color 0.15s ease, background-color 0.15s ease;
-        }
-
-        .service-item:hover {
-            border-color: #3a3f4d;
-            background: var(--bg-card-hover);
-        }
-
-        .service-info h3 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .service-info p {
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-        }
-
-        .price {
-            font-family: var(--font-mono);
-            font-weight: 700;
-            font-size: 0.95rem;
-            color: var(--accent);
-            white-space: nowrap;
-            background: var(--accent-dim);
-            padding: 0.25rem 0.6rem;
-            border-radius: 4px;
-        }
-
-        /* Rules Grid */
-        .rules-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 0.75rem;
-        }
-
-        .rule-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 1rem;
-        }
-
-        .rule-card strong {
-            display: block;
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: var(--text-primary);
-            margin-bottom: 0.35rem;
-        }
-
-        .rule-card p {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        /* Realizations / Proof Placeholder */
-        .proof-box {
-            background: var(--bg-card);
-            border: 1px dashed var(--border-color);
-            border-radius: 6px;
-            padding: 1.25rem;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        .proof-box code {
-            font-family: var(--font-mono);
-            color: var(--text-primary);
-            background: #1d2028;
-            padding: 0.15rem 0.4rem;
-            border-radius: 3px;
-            font-size: 0.82rem;
-        }
-
-        /* Contact CTA */
-        .cta-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.5rem;
-            text-align: center;
-        }
-
-        .cta-box p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-bottom: 1.25rem;
-        }
-
-        .btn-discord {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.6rem;
-            background: var(--accent);
-            color: #080a0d;
-            font-family: var(--font-mono);
-            font-weight: 700;
-            font-size: 0.95rem;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: transform 0.1s ease, opacity 0.15s ease;
-            width: 100%;
-            max-width: 320px;
-        }
-
-        .btn-discord:hover {
-            opacity: 0.92;
-        }
-
-        .btn-discord:active {
-            transform: scale(0.98);
-        }
-
-        .copy-status {
-            display: block;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--success);
-            margin-top: 0.65rem;
-            min-height: 1.2em;
-        }
-
-        /* Footer */
-        footer {
-            border-top: 1px solid var(--border-color);
-            padding-top: 1.5rem;
-            margin-top: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            font-family: var(--font-mono);
-            font-size: 0.78rem;
-            color: var(--text-secondary);
-        }
-
-        @media (max-width: 520px) {
-            .service-item {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-            h1 {
-                font-size: 1.65rem;
-            }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SelfBench – serwis laptopów Orzesze i Żory</title>
+<meta name="description" content="Mikro-serwis laptopów SelfBench: diagnoza, naprawa, czyszczenie, wymiana pasty i dysków. Orzesze, Żory i okolice.">
+<meta name="theme-color" content="#0b0d10">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0d10;--s1:#12151a;--s2:#191d24;--line:#232932;--tx:#e8edf3;--mut:#8b96a5;--cy:#22d3ee;--bl:#3b82f6;--ease:cubic-bezier(.22,.8,.3,1)}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(60rem 30rem at 85% -10%,rgba(34,211,238,.10),transparent 60%),radial-gradient(50rem 30rem at -10% 20%,rgba(59,130,246,.08),transparent 60%);pointer-events:none;z-index:-1}
+h1,h2,h3{font-family:Sora,sans-serif;line-height:1.15;letter-spacing:-.02em}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--cy);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+header{position:sticky;top:0;z-index:10;backdrop-filter:blur(14px);background:rgba(11,13,16,.72);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;justify-content:space-between;height:62px}
+.brand{font:700 1.15rem Sora;letter-spacing:-.02em}.brand b{color:var(--cy)}
+nav ul{display:flex;gap:26px;list-style:none;padding:0}
+nav ul a{color:var(--mut);font-size:.93rem;transition:color .25s var(--ease)}nav ul a:hover{color:var(--tx)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:12px;border:1px solid var(--line);background:var(--s2);color:var(--tx);font:600 .95rem Inter;cursor:pointer;transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s}
+.btn:hover{transform:translateY(-2px);border-color:#34404f}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn.pri{background:linear-gradient(135deg,var(--cy),var(--bl));color:#04121a;border:0;box-shadow:0 8px 28px -8px rgba(34,211,238,.55)}
+.btn.pri:hover{box-shadow:0 14px 34px -8px rgba(34,211,238,.7)}
+.hero{padding:88px 0 70px;display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(2.2rem,5.4vw,3.8rem);font-weight:700}
+.hero h1 span{background:linear-gradient(120deg,var(--cy),var(--bl));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--mut);max-width:48ch;margin:20px 0 30px;font-size:1.05rem}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.owner{justify-self:center;text-align:center}
+.avatar{width:min(260px,62vw);aspect-ratio:1;border-radius:34% 66% 58% 42%/46% 40% 60% 54%;padding:4px;background:linear-gradient(135deg,var(--cy),var(--bl));box-shadow:0 30px 60px -20px rgba(34,211,238,.35);animation:morph 14s ease-in-out infinite}
+.avatar div{position:relative;width:100%;height:100%;border-radius:inherit;overflow:hidden;background:var(--s1);display:grid;place-items:center}
+.avatar img{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;display:block}
+.avatar .ph{font:700 4rem Sora;color:var(--cy);opacity:.6}
+@keyframes morph{50%{border-radius:58% 42% 40% 60%/55% 58% 42% 45%}}
+.owner small{display:block;margin-top:16px;color:var(--mut)}.owner strong{font-family:Sora}
+section{padding:64px 0;scroll-margin-top:62px}
+.sec-h{margin-bottom:30px}.sec-h h2{font-size:clamp(1.6rem,3.4vw,2.2rem)}.sec-h p{color:var(--mut);margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.card{background:var(--s1);border:1px solid var(--line);border-radius:18px;padding:24px;transition:transform .3s var(--ease),border-color .3s,box-shadow .3s var(--ease)}
+.card:hover{transform:translateY(-4px);border-color:rgba(34,211,238,.4);box-shadow:0 18px 40px -18px rgba(34,211,238,.25)}
+.card h3{font-size:1.08rem;margin-bottom:8px}.card p{color:var(--mut);font-size:.95rem}
+.card i{display:block;width:34px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--cy),var(--bl));margin-bottom:18px}
+.posts{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.post{background:var(--s1);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.ba{position:relative;aspect-ratio:4/3;background:var(--s2);user-select:none;touch-action:pan-y}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ba .top{clip-path:inset(0 50% 0 0)}
+.ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.ba .bar{position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--cy);box-shadow:0 0 14px var(--cy);pointer-events:none}
+.ba .bar::after{content:"⇄";position:absolute;top:50%;left:50%;translate:-50% -50%;width:36px;height:36px;border-radius:50%;background:var(--bg);border:2px solid var(--cy);display:grid;place-items:center;font-size:.9rem;color:var(--cy)}
+.tag{position:absolute;bottom:10px;padding:3px 10px;border-radius:99px;background:rgba(11,13,16,.8);font-size:.75rem;pointer-events:none}
+.tag.l{left:10px}.tag.r{right:10px}
+.post .b{padding:20px 22px 24px}.post h3{font-size:1.1rem}
+.meta{color:var(--cy);font-size:.82rem;margin:4px 0 10px}.post p{color:var(--mut);font-size:.94rem;white-space:pre-line}
+.empty{grid-column:1/-1;text-align:center;color:var(--mut);padding:44px;border:1px dashed var(--line);border-radius:18px}
+.contact{background:linear-gradient(160deg,var(--s1),var(--s2));border:1px solid var(--line);border-radius:26px;padding:clamp(28px,5vw,52px);display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center;box-shadow:0 30px 70px -40px rgba(59,130,246,.45)}
+.phone{font:700 clamp(1.9rem,5vw,3rem) Sora;letter-spacing:-.02em;display:block;margin:6px 0 18px}
+.phone:hover{color:var(--cy)}
+.info{color:var(--mut);font-size:.95rem;display:grid;gap:8px}.info b{color:var(--tx);font-weight:500}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--mut);font-size:.88rem;text-align:center}
+.toast{position:fixed;left:50%;bottom:28px;translate:-50% 20px;opacity:0;background:var(--s2);border:1px solid var(--cy);padding:11px 20px;border-radius:12px;transition:.35s var(--ease);pointer-events:none}
+.toast.on{opacity:1;translate:-50% 0}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}.rv.in{opacity:1;transform:none}
+@media(max-width:780px){.hero,.contact{grid-template-columns:1fr}.hero{padding-top:48px}nav ul{display:none}.owner{order:-1}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}.rv{opacity:1;transform:none}}
+</style>
 </head>
 <body>
+<header><div class="wrap"><nav>
+<a class="brand" href="#top">Self<b>Bench</b></a>
+<ul><li><a href="#uslugi">Usługi</a></li><li><a href="#naprawy">Naprawy</a></li><li><a href="#kontakt">Kontakt</a></li></ul>
+<a class="btn pri" href="tel:579963965">Zadzwoń</a>
+</nav></div></header>
 
-    <div class="container">
-        <header>
-            <div class="badge">ORZESZE / ŻORY & OKOLICE</div>
-            <h1>[ Self<span>Bench</span> ]</h1>
-            <p class="lead">
-                Serwis i konserwacja laptopów bez salonowej marży. Jeśli Twój sprzęt wyje pod obciążeniem, zrzuca zegary albo grzeje się do 95°C — przywracam mu fabryczną kulturę pracy.
-            </p>
-        </header>
+<main class="wrap" id="top">
+<div class="hero">
+<div>
+<h1>Twój laptop wraca do <span>formy</span>.</h1>
+<p>Mikro-serwis laptopów w Orzeszu i Żorach. Uczciwa diagnoza, naprawa na stole serwisowym i jasna wycena przed pracą.</p>
+<div class="cta"><a class="btn pri" href="tel:579963965">Zadzwoń: 579 963 965</a><a class="btn" href="#naprawy">Zobacz naprawy</a></div>
+</div>
+<div class="owner">
+<!-- ZDJĘCIE WŁAŚCICIELA: wgraj plik jako img/ade.jpg (kwadrat, min. 600×600 px) -->
+<div class="avatar"><div><img src="img/ade.jpg" alt="Ade – właściciel SelfBench" onerror="this.remove()"><span class="ph">A</span></div></div>
+<small><strong>Ade</strong> (snHoney)<br>właściciel SelfBench</small>
+</div>
+</div>
 
-        <section>
-            <h2>Zakres usług i cennik</h2>
-            <div class="service-list">
-                <div class="service-item">
-                    <div class="service-info">
-                        <h3>Pełny serwis układu chłodzenia</h3>
-                        <p>Rozbiórka, czyszczenie radiatorów i wentylatorów z kurzu, wymiana pasty (Thermal Grizzly / Arctic MX-6) oraz kontrola termopadów.</p>
-                    </div>
-                    <span class="price">120 – 160 zł</span>
-                </div>
+<section id="uslugi">
+<div class="sec-h rv"><h2>Czym się zajmuję</h2><p>Sprzęt naprawiam sam, od diagnozy do odbioru.</p></div>
+<div class="grid">
+<div class="card rv"><i></i><h3>Diagnoza usterek</h3><p>Sprawdzam zasilanie, płytę, dysk, pamięć i chłodzenie. Dostajesz konkretną przyczynę i wycenę.</p></div>
+<div class="card rv"><i></i><h3>Czyszczenie i pasta</h3><p>Rozbiórka, czyszczenie wentylatorów i radiatora, nowa pasta termoprzewodząca. Laptop jest cichszy i chłodniejszy.</p></div>
+<div class="card rv"><i></i><h3>Dyski, RAM, system</h3><p>Wymiana na SSD, rozbudowa pamięci, instalacja systemu i przeniesienie danych.</p></div>
+<div class="card rv"><i></i><h3>Naprawy podzespołów</h3><p>Matryce, klawiatury, gniazda zasilania, zawiasy, baterie.</p></div>
+</div>
+</section>
 
-                <div class="service-item">
-                    <div class="service-info">
-                        <h3>Wymiana podzespołów (wentylator / dysk / RAM / bateria)</h3>
-                        <p>Montaż nowej części, testy stabilności i temperatur pod obciążeniem.</p>
-                    </div>
-                    <span class="price">od 80 zł + część</span>
-                </div>
+<section id="naprawy">
+<div class="sec-h rv"><h2>Ostatnie naprawy</h2><p>Przesuń suwak na zdjęciu, żeby porównać stan przed i po.</p></div>
+<div class="posts" id="posts"><div class="empty">Ładuję wpisy…</div></div>
+</section>
 
-                <div class="service-item">
-                    <div class="service-info">
-                        <h3>Czysty system i optymalizacja</h3>
-                        <p>Instalacja Windows/Linux od zera, komplet sterowników, usunięcie zbędnego bloatware'u i konfiguracja krzywych zasilania.</p>
-                    </div>
-                    <span class="price">100 zł</span>
-                </div>
+<section id="kontakt">
+<div class="contact rv">
+<div>
+<h2 style="font-size:clamp(1.6rem,3.4vw,2.2rem)">Zadzwoń, opisz problem</h2>
+<a class="phone" href="tel:579963965" id="phone">579 963 965</a>
+<div class="cta"><a class="btn pri" href="tel:579963965">Zadzwoń teraz</a><button class="btn" id="copy" type="button">Kopiuj numer</button></div>
+</div>
+<div class="info"><div><b>Obszar:</b> Orzesze, Żory i okolice</div><div><b>Wycena:</b> po diagnozie, przed rozpoczęciem pracy</div></div>
+</div>
+</section>
+</main>
+<footer><div class="wrap">© <span id="y"></span> SelfBench · Orzesze</div></footer>
+<div class="toast" id="toast" role="status">Numer skopiowany</div>
 
-                <div class="service-item">
-                    <div class="service-info">
-                        <h3>Weryfikacja sprzętu przed zakupem</h3>
-                        <p>Sprawdzenie temperatur, kondycji dysku (SMART), baterii oraz stanu płyty głównej w używanym laptopie.</p>
-                    </div>
-                    <span class="price">50 zł</span>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <h2>Zasady współpracy</h2>
-            <div class="rules-grid">
-                <div class="rule-card">
-                    <strong>01. Dokumentacja foto</strong>
-                    <p>Robię zdjęcia stanu sprzętu przed otwarciem oraz po wyczyszczeniu wnętrza. Widzisz dokładnie, za co płacisz.</p>
-                </div>
-                <div class="rule-card">
-                    <strong>02. Części z góry</strong>
-                    <p>Jeśli wymagana jest wymiana wentylatora lub innego podzespołu, zamawiamy go po opłaceniu kosztu części.</p>
-                </div>
-                <div class="rule-card">
-                    <strong>03. Czas realizacji</strong>
-                    <p>Standardowe czyszczenie i wymiana pasty zajmuje zwykle 24–48 godzin od przekazania sprzętu.</p>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <h2>Ostatnie realizacje</h2>
-            <div class="proof-box">
-                <strong>Lenovo IdeaPad Gaming 3</strong> — pełne czyszczenie układu chłodzenia, wymiana zatartego wentylatora CPU, nowa pasta termoprzewodząca oraz naprawa gniazda zasilania.<br><br>
-                <small>Wskazówka: Wrzuć tu zdjęcia przed/po jako pliki <code>przed.jpg</code> i <code>po.jpg</code> w repozytorium GitHub, gdy zrobisz kolejne zlecenie.</small>
-            </div>
-        </section>
-
-        <section>
-            <h2>Kontakt i wycena</h2>
-            <div class="cta-box">
-                <p>Podaj dokładny model laptopa (naklejka na spodzie obudowy) i opisz objawy. Odpowiem z konkretną wyceną.</p>
-                <button class="btn-discord" id="copyBtn" onclick="copyDiscord()">
-                    Kopiuj Discord: snHoney
-                </button>
-                <span class="copy-status" id="copyStatus"></span>
-            </div>
-        </section>
-
-        <footer>
-            <span>SelfBench // Ade (snHoney)</span>
-            <span>Orzesze • Żory • Rybnik</span>
-        </footer>
-    </div>
-
-    <script>
-        function copyDiscord() {
-            const handle = "snHoney";
-            navigator.clipboard.writeText(handle).then(() => {
-                const status = document.getElementById("copyStatus");
-                status.textContent = "Skopiowano nick 'snHoney' do schowka.";
-                setTimeout(() => {
-                    status.textContent = "";
-                }, 3000);
-            }).catch(() => {
-                const status = document.getElementById("copyStatus");
-                status.textContent = "Nick Discord: snHoney";
-            });
-        }
-    </script>
-
+<script>
+const $=s=>document.querySelector(s),esc=t=>String(t??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+$("#y").textContent=new Date().getFullYear();
+/* kopiowanie numeru */
+$("#copy").onclick=async()=>{const n="579963965";try{await navigator.clipboard.writeText(n)}catch{const t=document.createElement("textarea");t.value=n;document.body.append(t);t.select();document.execCommand("copy");t.remove()}
+const el=$("#toast");el.classList.add("on");setTimeout(()=>el.classList.remove("on"),1800)};
+/* wpisy z data/wpisy.json (edytowane w /admin) */
+const safeImg=u=>u&&/^(\/?img\/|https?:\/\/)/.test(u)?u.replace(/^\//,""):"";
+fetch("data/wpisy.json",{cache:"no-cache"}).then(r=>r.json()).then(d=>{
+ const list=(d.wpisy||[]).slice().sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+ $("#posts").innerHTML=list.length?list.map(p=>{
+  const b=safeImg(p.before),a=safeImg(p.after);
+  const media=b&&a?`<div class="ba"><img src="${esc(a)}" alt="Po naprawie" loading="lazy"><img class="top" src="${esc(b)}" alt="Przed naprawą" loading="lazy"><span class="bar"></span><span class="tag l">Przed</span><span class="tag r">Po</span><input type="range" min="0" max="100" value="50" aria-label="Porównaj przed i po"></div>`
+  :(a||b)?`<div class="ba"><img src="${esc(a||b)}" alt="${esc(p.title)}" loading="lazy"></div>`:"";
+  return `<article class="post rv">${media}<div class="b"><h3>${esc(p.title)}</h3><div class="meta">${esc(p.device)}${p.device&&p.date?" · ":""}${esc(p.date)}</div><p>${esc(p.description)}</p></div></article>`}).join("")
+ :'<div class="empty">Wkrótce pojawią się tu zdjęcia i opisy wykonanych napraw.</div>';
+ document.querySelectorAll(".ba input").forEach(i=>{const w=i.parentNode,t=w.querySelector(".top"),bar=w.querySelector(".bar");
+  i.oninput=()=>{t.style.clipPath=`inset(0 ${100-i.value}% 0 0)`;bar.style.left=i.value+"%"}});
+ reveal()}).catch(()=>{$("#posts").innerHTML='<div class="empty">Nie udało się wczytać wpisów.</div>'});
+/* pojawianie sekcji */
+function reveal(){const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}}),{threshold:.12});document.querySelectorAll(".rv:not(.in)").forEach(el=>io.observe(el))}
+reveal();
+</script>
 </body>
 </html>

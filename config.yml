@@ -1,0 +1,28 @@
+backend:
+  name: github
+  repo: TWOJ_LOGIN/selfbench               # <- zmień na swoje repo
+  branch: main
+  base_url: https://TWOJA-DOMENA.pages.dev   # <- adres OAuth proxy (Cloudflare)
+  auth_endpoint: /api/auth
+media_folder: img/wpisy
+public_folder: /img/wpisy
+locale: pl
+collections:
+  - name: wpisy
+    label: Naprawy
+    files:
+      - name: lista
+        label: Wpisy o naprawach
+        file: data/wpisy.json
+        fields:
+          - label: Wpisy
+            name: wpisy
+            widget: list
+            summary: "{{fields.date}} – {{fields.title}}"
+            fields:
+              - {label: Tytuł, name: title, widget: string}
+              - {label: Data, name: date, widget: datetime, time_format: false, date_format: "YYYY-MM-DD"}
+              - {label: Sprzęt, name: device, widget: string, required: false}
+              - {label: Zdjęcie PRZED, name: before, widget: image, required: false}
+              - {label: Zdjęcie PO, name: after, widget: image, required: false}
+              - {label: Opis wykonanych prac, name: description, widget: text}
